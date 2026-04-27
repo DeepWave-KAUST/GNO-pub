@@ -93,9 +93,6 @@ When evaluating the performance of our pre-trained GNO, use the test dataset pro
   journal={arXiv preprint arXiv:2503.06488},
   year={2025}
 }
-```
-
-```bibtex
 @inproceedings{cheng2025generative,
   title={A generative neural operator for seismic wavefield representation},
   author={Cheng, S and Taufik, MH and Alkhalifah, T},
