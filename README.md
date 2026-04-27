@@ -1,4 +1,4 @@
-![LOGO](https://github.com/DeepWave-Kaust/GNO-pub/blob/main/asset/logo.jpg)
+![LOGO](https://github.com/DeepWave-Kaust/GNO-pub/blob/main/logo/logo.jpg)
 
 <div align="center">
 
