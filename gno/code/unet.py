@@ -41,7 +41,7 @@ class TimeEmbedding(nn.Module):
         half_dim = self.dim // 2
         emb = math.log(10000) / half_dim
         emb = th.exp(th.arange(half_dim, device=device) * -emb)
-        emb = th.outer(x * self.scale, emb) # 计算两个一维张量的外积
+        emb = th.outer(x * self.scale, emb)
         emb = th.cat((emb.sin(), emb.cos()), dim=-1)
         return emb
 
@@ -130,9 +130,6 @@ class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
     """
 
     def forward(self, x, time_emb):
-        # 表示会对自己的layer进行遍历
-        # 如果layer是TimestepBlock，则输入包括x_t和emb
-        # 如果layer不是TimestepBlock，则输入只包括x_t
         for layer in self:
             if isinstance(layer, TimestepBlock):
                 x = layer(x, time_emb)
@@ -309,8 +306,6 @@ class AttentionBlock(nn.Module):
         self.qkv = conv_nd(1, channels, channels * 3, 1)
         self.attention = QKVAttention()
 
-        # conv_nd 创建了一个卷积层，其参数（权重和偏置）随后通过 zero_module 函数被设为零。
-        # 这意味着卷积层在开始时不会对输入数据产生任何影响，因为它的所有参数都是零。
         self.proj_out = zero_module(conv_nd(1, channels, channels, 1))
 
     def forward(self, x):
@@ -593,27 +588,4 @@ class UNetModel(nn.Module):
         mod_pad_w = (self.padder_size - w % self.padder_size) % self.padder_size
         x = F.pad(x, (0, mod_pad_w, 0, mod_pad_h), mode='replicate')
         return x
-
-
-class SuperResModel(UNetModel):
-    """
-    A UNetModel that performs super-resolution.
-
-    Expects an extra kwarg `low_res` to condition on a low-resolution image.
-    """
-
-    def __init__(self, in_channels, *args, **kwargs):
-        super().__init__(in_channels * 2, *args, **kwargs)
-
-    def forward(self, x, input, timesteps, cls, low_res=None, **kwargs):
-        _, _, new_height, new_width = x.shape
-        upsampled = F.interpolate(low_res, (new_height, new_width), mode="bilinear")
-        x = th.cat([x, upsampled], dim=1)
-        return super().forward(x, input, timesteps, cls, **kwargs)
-
-    def get_feature_vectors(self, x, input, timesteps, cls, low_res=None, **kwargs):
-        _, new_height, new_width, _ = x.shape
-        upsampled = F.interpolate(low_res, (new_height, new_width), mode="bilinear")
-        x = th.cat([x, upsampled], dim=1)
-        return super().get_feature_vectors(x, input, timesteps, cls, **kwargs)
 

@@ -31,7 +31,6 @@ class ScheduleSampler(ABC):
     terms are reweighted, allowing for actual changes in the objective.
     """
 
-    # 这是一个抽象方法，需要在子类中被实现。它应返回一个 NumPy 数组，其中包含每个扩散步骤的权重。
     @abstractmethod
     def weights(self):
         """
@@ -40,8 +39,6 @@ class ScheduleSampler(ABC):
         The weights needn't be normalized, but must be positive.
         """
 
-    # 这个方法对扩散过程中的时间步进行重要性采样。
-    # 给定一个批量大小 batch_size 和设备 device，它返回采样得到的时间步和相应的权重。
     def sample(self, batch_size, device):
         """
         Importance-sample timesteps for a batch.
@@ -60,7 +57,6 @@ class ScheduleSampler(ABC):
         weights = th.from_numpy(weights_np).float().to(device)
         return indices, weights
 
-# 通过均匀采样所有时间步，
 class UniformSampler(ScheduleSampler):
     def __init__(self, diffusion):
         self.diffusion = diffusion

@@ -1,12 +1,7 @@
 import numpy as np
 import torch as th
-
 from .gaussian_diffusion import GaussianDiffusion
 
-
-# section_counts表示分成几部分来采样
-# 如果传入的100,100,100, 相当于将原始的num_timesteps分成3个部分，每个部分包含100步
-# 特殊情况ddimN，N表示每部份的步数
 def space_timesteps(num_timesteps, section_counts):
     """
     Create a list of timesteps to use from an original diffusion process,
@@ -73,14 +68,13 @@ class SpacedDiffusion(GaussianDiffusion):
     """
 
     def __init__(self, use_timesteps, **kwargs):
-        self.use_timesteps = set(use_timesteps)   # 指可以用的时间步，可能是步长为1，也有可能步长大于1（respacing）
-        self.timestep_map = []      # 基本等同于use_timesteps, 不过是列表
+        self.use_timesteps = set(use_timesteps)   
+        self.timestep_map = []      
         self.original_num_steps = len(kwargs["betas"])
 
         base_diffusion = GaussianDiffusion(**kwargs)  # pylint: disable=missing-kwoa
         last_alpha_cumprod = 1.0
 
-        # 重新定义beta序列
         new_betas = []
         for i, alpha_cumprod in enumerate(base_diffusion.alphas_cumprod):
             if i in self.use_timesteps:
@@ -88,12 +82,10 @@ class SpacedDiffusion(GaussianDiffusion):
                 last_alpha_cumprod = alpha_cumprod
                 self.timestep_map.append(i)
 
-        # 更新self.betas成员变量
-        kwargs["betas"] = np.array(new_betas)   # 此处更新了betas
+        kwargs["betas"] = np.array(new_betas)  
 
         super().__init__(**kwargs)
 
-    # 神经网络所预测的均值和方差
     def p_mean_variance(
         self, model, *args, **kwargs
     ):  # pylint: disable=signature-differs
@@ -115,10 +107,6 @@ class SpacedDiffusion(GaussianDiffusion):
         # Scaling is done by the wrapped model.
         return t
 
-
-# timestep_map 代表新的时间序列
-# rescale_timesteps 表示将所有的时间步长限制在一个范围之内
-# original_num_steps 表示原始的时间步长
 class _WrappedModel:
     def __init__(self, model, timestep_map, rescale_timesteps, original_num_steps):
         self.model = model
@@ -127,12 +115,8 @@ class _WrappedModel:
         self.original_num_steps = original_num_steps
 
     def __call__(self, x, input, ts, vel, **kwargs):
-        # ts 是连续的索引，map_tensor中包含的是spacing后的索引
-        # __call__的作用是将ts映射到真正的spacing后的时间步骤
-
         map_tensor = th.tensor(self.timestep_map, device=ts.device, dtype=ts.dtype)
 
-        # 将连续的ts转换到新的new_ts上
         new_ts = map_tensor[ts]
         if self.rescale_timesteps:
             new_ts = new_ts.float() * (1000.0 / self.original_num_steps)

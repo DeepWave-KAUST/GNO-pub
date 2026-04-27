@@ -1,4 +1,4 @@
-![LOGO](https://github.com/DeepWave-Kaust/GNO-dev/blob/main/asset/logo_new.jpg)
+![LOGO](https://github.com/DeepWave-Kaust/GNO-pub/blob/main/asset/logo.jpg)
 
 <div align="center">
 
@@ -16,8 +16,8 @@
 This repository is organized as follows:
 
 * :open_file_folder: **gno**: python library containing routines for generative neural operator;
-* :open_file_folder: **asset**: folder containing logo;
-* :open_file_folder: **data**: folder to store dataset;
+* :open_file_folder: **logo**: folder containing logo;
+* :open_file_folder: **dataset**: folder to store dataset;
 
 ## Supplementary files
 To ensure reproducibility, we provide the the data set for both training and sampling stages and our trainined GNO model. 

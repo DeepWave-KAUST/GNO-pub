@@ -62,21 +62,17 @@ def discretized_gaussian_log_likelihood(x, *, means, log_scales):
     centered_x = x - means
     inv_stdv = th.exp(-log_scales)
 
-    # 将[-1,1]分成255个bins，最右边的CDF记为1，最左边的CDF记为0
     plus_in = inv_stdv * (centered_x + 1.0 / 255.0)
     cdf_plus = approx_standard_normal_cdf(plus_in)
 
     min_in = inv_stdv * (centered_x - 1.0 / 255.0)
     cdf_min = approx_standard_normal_cdf(min_in)
 
-    # 这里clamp是为了稳定，避免太小值不稳定
     log_cdf_plus = th.log(cdf_plus.clamp(min=1e-12))
     log_one_minus_cdf_min = th.log((1.0 - cdf_min).clamp(min=1e-12))
 
-    # 用小范围的CDF之差来表示CDF
     cdf_delta = cdf_plus - cdf_min
 
-    # 考虑到两个极限的地方，这里用到了两个where
     log_probs = th.where(
         x < -0.999,
         log_cdf_plus,

@@ -51,11 +51,6 @@ def avg_pool_nd(dims, *args, **kwargs):
         return nn.AvgPool3d(*args, **kwargs)
     raise ValueError(f"unsupported dimensions: {dims}")
 
-'''
-此函数将目标参数更新为目标参数和源参数的加权平均。
-通过这种方式，目标参数逐渐“移动”到源参数，但更新是平滑的，不会在每个训练步骤中完全复制源参数。
-
-'''
 def update_ema(target_params, source_params, rate=0.99):
     """
     Update target parameters to be closer to those of source parameters using
