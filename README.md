@@ -15,7 +15,7 @@
 # Project structure
 This repository is organized as follows:
 
-* :open_file_folder: **package**: python library containing routines for generative neural operator;
+* :open_file_folder: **gno**: python library containing routines for generative neural operator;
 * :open_file_folder: **asset**: folder containing logo;
 * :open_file_folder: **data**: folder to store dataset;
 
