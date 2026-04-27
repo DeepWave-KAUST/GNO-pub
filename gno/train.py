@@ -152,7 +152,7 @@ def create_argparser():
         argparse.ArgumentParser: Fully configured argument parser.
     """
     defaults = dict(
-        data_dir="../../../dataset/train_multifreq_multismooth/",   # Synthetic training data directory
+        data_dir="../dataset/train/",   # Synthetic training data directory
         schedule_sampler="uniform",     # Timestep sampling: "uniform" or "loss-second-moment"
         lr=1e-4,                        # AdamW learning rate
         weight_decay=5e-5,              # AdamW weight decay (L2 regularization)
