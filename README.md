@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<h3><strong>Physics-guided generative neural operator for seismic wavefield solutions</strong></h2>
+<h3><strong>Seismic wavefield solutions via physics-guided generative neural operator</strong></h2>
 
 <h4>Shijun Cheng, Mohammad H. Taufik, Tariq Alkhalifah</h3>
 
@@ -64,5 +64,5 @@ When you test the performance of our trained GNO, you can use the test data we p
 configurations may be required for different combinations of workstation and GPU. If your graphics card does not large batch size training, please reduce the configuration value of args (`batch_size`) in the `gno/train.py` file.
 
 ## Cite us 
-Cheng et al. (2026) Physics-guided generative neural operator for seismic wavefield solutions.
+Cheng et al. (2026) Seismic wavefield solutions via physics-guided generative neural operator.
 
