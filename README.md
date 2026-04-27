@@ -1,8 +1,16 @@
 ![LOGO](https://github.com/DeepWave-Kaust/GNO-dev/blob/main/asset/logo_new.jpg)
 
-Reproducible material for **DW0064: Physics-guided generative neural operator for seismic wavefield solutions - Shijun Cheng, Mohammad H. Taufik, Tariq Alkhalifah.**
+<div align="center">
 
-[Click here](https://kaust.sharepoint.com/:f:/r/sites/M365_Deepwave_Documents/Shared%20Documents/Restricted%20Area/REPORTS/DW0064?csf=1&web=1&e=XwImEQ) to access the Project Report. Authentication to the _Restricted Area_ filespace is required.
+<h3><strong>Physics-guided generative neural operator for seismic wavefield solutions</strong></h2>
+
+<h4>Shijun Cheng, Mohammad H. Taufik, Tariq Alkhalifah</h3>
+
+<h4><em>DeepWave Consortium, King Abdullah University of Science and Technology (KAUST)</em></h4>
+
+<p><em>Corresponding author: Shijun Cheng (<a href="mailto:sjcheng.academic@gmail.com">sjcheng.academic@gmail.com</a>)</em></p>
+
+</div>
 
 # Project structure
 This repository is organized as follows:
@@ -56,5 +64,5 @@ When you test the performance of our trained GNO, you can use the test data we p
 configurations may be required for different combinations of workstation and GPU. If your graphics card does not large batch size training, please reduce the configuration value of args (`batch_size`) in the `gno/train.py` file.
 
 ## Cite us 
-DW0064 - Cheng et al. (2024) Physics-guided generative neural operator for seismic wavefield solutions.
+Cheng et al. (2026) Physics-guided generative neural operator for seismic wavefield solutions.
 
