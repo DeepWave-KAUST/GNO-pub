@@ -12,14 +12,50 @@ This repository is organized as follows:
 
 * :open_file_folder: **gno**: Python library containing routines for the generative neural operator;
 * :open_file_folder: **logo**: folder containing logo;
-* :open_file_folder: **dataset**: folder to store datasets, including:
-  * :open_file_folder: **dataset/traindata_generation**: MATLAB scripts and velocity models for generating the training dataset;
-    * :open_file_folder: **dataset/traindata_generation/scripts**: MATLAB scripts for data generation (entry point: `main.m`);
+* :open_file_folder: **trained_model**: empty folder for storing the downloaded pre-trained GNO weights;
+* :open_file_folder: **dataset**: folder containing all datasets, organized as:
+  * :open_file_folder: **dataset/test**: test datasets for all four benchmark velocity models
+    (`CurveVel-A`, `CurveFault-A`, `CurveFault-B`, `FlatFault-B`),
+    each provided at six frequencies (4, 6, 8, 10, 12, 15 Hz);
+  * :open_file_folder: **dataset/traindata_generation**: resources for reproducing the training dataset:
+    * :open_file_folder: **dataset/traindata_generation/scripts**: MATLAB data generation scripts (entry point: `main.m`);
     * :page_facing_up: **dataset/traindata_generation/v_train.mat**: velocity models used during training data generation;
 
 ## Supplementary files
 
 To ensure reproducibility, we provide resources for both the training and sampling stages, along with our pre-trained GNO model.
+
+### Test dataset
+
+The test dataset is included directly in this repository under `dataset/test/`. It covers the four benchmark velocity model families evaluated in the manuscript:
+
+| Model | Frequencies |
+|---|---|
+| `CurveVel-A` | 4, 6, 8, 10, 12, 15 Hz |
+| `CurveFault-A` | 4, 6, 8, 10, 12, 15 Hz |
+| `CurveFault-B` | 4, 6, 8, 10, 12, 15 Hz |
+| `FlatFault-B` | 4, 6, 8, 10, 12, 15 Hz |
+
+Each `.mat` file contains the background wavefield (`u0`), scattered wavefield (`du`), velocity model (`v`), and source location list (`shot_loc_list`) for the corresponding model and frequency.
+
+### Pre-trained model
+
+The pre-trained GNO weights are available for download from Google Drive:
+
+:arrow_down: **[Download trained_GNO.pt](https://drive.google.com/file/d/1XG4MrDt1vwkSZuSxw_8bm5c-u1tmKBH7/view?usp=drive_link)**
+
+After downloading, place the file in the `trained_model/` folder provided in this repository:
+
+```
+GNO-pub/
+└── trained_model/
+└── trained_GNO.pt   ← place here
+```
+
+Then update the `model_path` argument in `sample.py` accordingly, or pass it directly via the command line:
+```
+python sample.py --model_path ../trained_model/trained_GNO.pt
+```
 
 ### Training dataset
 

@@ -279,7 +279,7 @@ def create_argparser():
         use_ddim=True,
         dh=0.025,           # Grid spacing: 25 m = 0.025 km
         scale_factor=0.002, # Default PDE guidance strength
-        model_path="../../trained_GNO.pt",
+        model_path="../trained_model/trained_GNO.pt",
     )
     defaults.update(model_and_diffusion_defaults())
     parser = argparse.ArgumentParser()
