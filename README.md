@@ -77,10 +77,6 @@ cd dataset/traindata_generation/scripts
 
 > **Note:** Generation time depends on the number of frequency components and shot gathers configured in `main.m`. We recommend running on a machine with sufficient RAM and adjusting the parallelism settings at the top of the script if needed.
 
-### Pre-trained model and test dataset
-
-The pre-trained GNO weights and the test dataset are available for download. *(Add Zenodo / cloud drive link here once available.)*
-
 ## Getting started :space_invader: :robot:
 
 To ensure reproducibility of the results, we suggest using the `environment.yml` file when creating an environment. Simply run:
