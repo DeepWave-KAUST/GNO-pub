@@ -119,12 +119,19 @@ When evaluating the performance of our pre-trained GNO, use the test dataset pro
 ## Cite us
 
 ```bibtex
-@article{cheng2025seismic,
-  title={Seismic wavefield solutions via physics-guided generative neural operator},
-  author={Cheng, Shijun and Taufik, Mohammad H and Alkhalifah, Tariq},
-  journal={arXiv preprint arXiv:2503.06488},
-  year={2025}
+@article{cheng2026gno,
+    author = {Cheng, Shijun and Taufik, Mohammad H. and Alkhalifah, Tariq},
+    title = {Seismic wavefield solutions via physics-guided generative neural operator},
+    journal = {Geophysics},
+    volume = {91},
+    number = {5},
+    pages = {F13-F26},
+    year = {2026},
+    month = {08},
+    issn = {0016-8033},
+    doi = {10.1190/GEO-2026-1784},
 }
+
 @inproceedings{cheng2025generative,
   title={A generative neural operator for seismic wavefield representation},
   author={Cheng, S and Taufik, MH and Alkhalifah, T},
